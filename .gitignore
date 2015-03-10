@@ -137,3 +137,4 @@ bower_components
 .bower-tmp
 
 *.marko.js
+public/css/app.css
