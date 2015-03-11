@@ -6,8 +6,21 @@
     color: @color-empress;
     font-weight: 300;
     font-size: 8em;
+    line-height: 1em;
     text-align: center;
+    background-color: #ffffff;
 
+    opacity: 0;
+    transition: 700ms ease-in-out;
+
+    &.loaded {
+      animation-name: marquis-reveal-choices;
+      animation-duration: 0.1s;//1.6s;
+      animation-iteration-count: 1;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode:forwards;
+    }
+    
     .marquis {
       font-weight: 400;
       font-size: 6rem;
@@ -15,15 +28,59 @@
       animation-name: marquiser;
       animation-duration: 10s;
       animation-iteration-count: infinite;
-      animation-direction: alternate;
       animation-timing-function: ease-in-out;
+    }
+  }
+
+  .marquis-choices {
+    position: relative;
+
+    .choices-wrapper {
+      position: absolute;
+      width: 100%;
+      margin-top: 100px;
+      margin-bottom: 0;
+      text-align: center;
+
+      opacity: 0;
+      transition: opacity 250ms ease-in-out;
+
+      &.loaded {
+        opacity: 1;
+        transition-delay: 0;//1.5s;
+      }
+
+      a {
+        background-color: @color-torch-red;
+        color: #ffffff;
+
+        background-position: 0 0%;
+        background-size: 100% auto;
+        transition: 0.5s ease-in-out;
+
+        &:hover {
+          background-size: 200% auto;
+          //background: linear-gradient(135deg, #f71737 0%,#fa586f 100%);
+        }
+
+        &.choice-gimme {
+          margin-left: 5px;
+          background-image: linear-gradient(135deg, #f71737, #fa586f);
+        }
+
+        &.choice-pickup {
+          margin-right: 5px;
+          background-image: linear-gradient(135deg, #fa586f, #f71737);
+        }
+
+      }
     }
   }
 }
 
 @keyframes marquiser {
   0% {
-    color: hsl(342, 70%, 51%);
+    color: hsl(351, 93%, 53%);
   }
 
   16% {
@@ -47,16 +104,31 @@
   }
 
   100% {
-    color: hsl(10, 94%, 58%);
+    color: hsl(351, 93%, 53%);
   }
 }
 
-/*
-d9295d hsl(342, 70%, 51%);
-cb46f1 hsl(287, 86%, 61%);
-5078fb hsl(226, 96%, 65%);
-50cdfb hsl(196, 96%, 65%);
-47a161 hsl(137, 39%, 45%);
- f1d658 hsl(49, 85%, 65%);
-  f84f2e hsl(10, 94%, 58%);
-  */
+@keyframes marquis-reveal-choices {
+
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(-40px);
+  }
+}
