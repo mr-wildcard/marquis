@@ -3,6 +3,9 @@ var less = require("gulp-less");
 var combiner = require('stream-combiner2');
 var postcss = require('gulp-postcss');
 var inject = require('gulp-inject');
+var coffee = require('gulp-coffee');
+var gutil = require('gutil');
+var rename = require('gulp-rename');
 
 gulp.task("dev-css", function () {
 
@@ -23,10 +26,26 @@ gulp.task("dev-css", function () {
     return combined;
 });
 
+gulp.task("dev-js", function () {
+
+    var combined = combiner.obj([
+        gulp.src( "assets/js/**/*.coffee" ),
+        coffee({bare: true}),
+        rename('app.js'),
+        gulp.dest("public/js")
+    ]);
+
+    combined.on('error', console.error.bind(console));
+
+    return combined;
+
+});
+
 gulp.task("watch", function () {
     gulp.watch( "assets/css/**/*.less", ["dev-css"] );
+    gulp.watch( "assets/js/**/*.coffee", ["dev-js"] );
 });
 
 gulp.task('dev', function() {
-    gulp.start('dev-css', 'watch');
+    gulp.start('dev-css', 'dev-js', 'watch');
 });
