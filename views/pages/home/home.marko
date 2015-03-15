@@ -6,7 +6,10 @@
                 <div class="marquis-choices">
                     <p class="choices-wrapper">
                         <a href="#" class="choice-pickup btn">Choose one of my markers</a>
-                        <a href="#" class="choice-gimme btn">Upload one of your own</a>
+                        <form style="height: 500px;" action="/" method="post" enctype="multipart/form-data">
+                            <input type="file" name="file">
+                            <input type="submit" value="Upload">
+                          </form>
                     </p>
                 </div>
                 <div class="marquis-logo">
