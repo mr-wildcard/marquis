@@ -139,3 +139,5 @@ bower_components
 *.marko.js
 public/css/app.css
 public/js/app.js
+uploads/
+public/gm
