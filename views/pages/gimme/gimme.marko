@@ -1,5 +1,11 @@
 <layout-use template="./../../default.marko">
     <layout-put into="body">
-        <img src="${data.gmImagePath}" alt="Tadaaaa" />
+        <img src="${data.gmImage}" alt="Tadaaaa" />
+
+        <form action="/gimme" method="post">
+            <input type="text" name="newColor" value="${data.gmNewColor}" />
+            <input type="hidden" name="imageId" value="${data.gmImageId}" />
+            <input type="submit" value="Enregistrer" />
+        </form>
     </layout-put>
 </layout-use>

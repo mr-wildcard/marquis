@@ -7,6 +7,7 @@ let koa = require('koa'),
     views = require('koa-views'),
     compress = require('koa-compress'),
     parse = require('co-busboy'),
+    bodyParse = require('co-body'),
     fs = require('fs'),
     os = require('os'),
     path = require('path'),
@@ -41,6 +42,10 @@ app.use(router(app));
 
 app.get('/', function *() {
 
+    if (this.session !== null) {
+      this.session = null;
+    }
+
     this.body = marko.load('./views/pages/home/home.marko').renderSync({});
     this.type = "text/html";
 });
@@ -54,10 +59,34 @@ app.get('/pickup', function *() {
 app.get('/gimme', function *() {
 
     this.body = marko.load('./views/pages/gimme/gimme.marko').renderSync({
-        gmImagePath: this.session.finalImage
+      gmImage: this.session.originalImage,
+      gmImageId: this.session.gmImageId,
+      gmNewColor: "#ff0000"
     });
 
     this.type = "text/html";
+});
+
+app.post('/gimme', function *(next) {
+
+  var modifiedImageParts = yield bodyParse(this);
+
+  // if this.session.gmImageId === modifiedImageParts.imageId
+
+  yield exportImage(
+          'public/' + this.session.originalImage,
+          'public/gm/' + this.session.gmImageId + ".png",
+          modifiedImageParts.newColor
+  );
+
+  this.body = marko.load('./views/pages/gimme/gimme.marko').renderSync({
+    gmImage: 'gm/' + this.session.gmImageId + ".png",
+    gmImageId: this.session.gmImageId,
+    gmNewColor: modifiedImageParts.newColor
+  });
+
+  this.type = "text/html";
+
 });
 
 app.post('/', function *(next) {
@@ -66,26 +95,27 @@ app.post('/', function *(next) {
     var uploadPart;
     var stream;
 
-    var randomImagePath = Math.round(1 + Math.random() * 10000) + '.png';
+    var randomImageId = Math.round(1 + Math.random() * 10000);
+    var randomImagePath = randomImageId + '.png';
 
     while (uploadPart = yield uploadParts) {
-        stream = fs.createWriteStream(path.join('uploads/', randomImagePath));
+        stream = fs.createWriteStream(path.join('public/uploads/', randomImagePath));
         uploadPart.pipe(stream);
         console.log('uploading %s -> %s', uploadPart.filename, stream.path);
-    }
+    };
 
-    yield exportImage('uploads/' + randomImagePath, 'public/gm/' + randomImagePath);
-
-    this.session.finalImage = 'gm/' + randomImagePath;
+    this.session.originalImage = 'uploads/' + randomImagePath;
+    this.session.gmImageId = randomImageId;
     this.redirect('/gimme');
 
 });
 
-function exportImage(inputPath, outputPath) {
+function exportImage(inputPath, outputPath, hexColor) {
 
     return function(done) {
         gm(inputPath)
-            .flip()
+            .modulate(100,0, 100)
+            .out('+level-colors', hexColor)
             .write(outputPath, done);
     };
 
