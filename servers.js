@@ -15,6 +15,7 @@ let koa = require('koa'),
     session = require('koa-session-redis'),
     marko = require('marko'),
     thunkify = require('co-thunkify'),
+    Caman = require('caman').Caman,
     gm = require('gm').subClass({ imageMagick: true });
 
 let app = koa();
@@ -72,11 +73,18 @@ app.post('/gimme', function *(next) {
   var modifiedImageParts = yield bodyParse(this);
 
   // if this.session.gmImageId === modifiedImageParts.imageId
-
+/*
   yield exportImage(
           'public/' + this.session.originalImage,
           'public/gm/' + this.session.gmImageId + ".png",
           modifiedImageParts.newColor
+  );
+*/
+
+  yield camanExportImage(
+      'public/' + this.session.originalImage,
+      'public/gm/' + this.session.gmImageId + ".png",
+      modifiedImageParts.newColor
   );
 
   this.body = marko.load('./views/pages/gimme/gimme.marko').renderSync({
@@ -119,6 +127,20 @@ function exportImage(inputPath, outputPath, hexColor) {
             .write(outputPath, done);
     };
 
+}
+
+function camanExportImage(inputPath, outputPath, hexColor) {
+
+    return function(done) {
+      Caman(inputPath, function () {
+        this.vibrance(0)
+        this.colorize(hexColor, 100)
+        this.render(function () {
+          this.save(outputPath);
+          done();
+        });
+      });
+    };
 }
 
 let server = app.listen(3000);

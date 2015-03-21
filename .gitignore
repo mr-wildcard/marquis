@@ -143,3 +143,5 @@ uploads/
 public/gm
 gm_test/
 gm_test.js
+
+config/local.js
