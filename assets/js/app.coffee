@@ -1,7 +1,8 @@
 window.onload = ->
 
-	qsMaquisLogo = document.querySelector('.marquis-logo');
-	qsChoicesWrapper = document.querySelector('.choices-wrapper');
+	qsMaquisLogo = document.querySelector('.marquis-logo')
+	qsMaquisChoices = document.querySelector('.marquis-choices')
 
-	qsMaquisLogo.classList.add 'loaded';
-	qsChoicesWrapper.classList.add 'loaded';
+	if qsMaquisLogo
+		qsMaquisLogo.classList.add 'loaded'
+		qsMaquisChoices.classList.add 'loaded'

@@ -1,23 +1,14 @@
 <layout-use template="./../../default.marko">
 
     <layout-put into="body">
-        <div class="home-container table-like">
-            <div class="table-cell-like">
-                <div class="marquis-choices">
-                    <p class="choices-wrapper">
-                        <a href="#" class="choice-pickup btn">Choose one of my markers</a>
-                        <form style="height: 500px;" action="/" method="post" enctype="multipart/form-data">
-                            <input type="file" name="file">
-                            <input type="submit" value="Upload">
-                          </form>
-                    </p>
-                </div>
-                <div class="marquis-logo">
-                    <span>M</span>
-                    <i class="marquis glyphicon glyphicon-map-marker"></i>
-                    <span>rquis</span>
-                </div>
-            </div>
+        <div class="marquis-logo">
+            <span>M</span>
+            <i class="marquis glyphicon glyphicon-map-marker"></i>
+            <span>rquis</span>
+        </div>
+        <div class="marquis-choices">
+            <p>Drag and drop your marker anywhere on this page</p>
+            <a href="/pickup" class="choice-pickup btn">Or pickup one already uploaded</a>
         </div>
     </layout-put>
 
