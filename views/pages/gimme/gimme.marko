@@ -5,13 +5,13 @@
             <img src="${data.dataURI}" alt="Tadaaaa" />
         </div>
         <div else>
-            <img src="${data.gmImage}" alt="Tadaaaa" />
+            <img src="${data.originalImage}" alt="Tadaaaa" />
         </div>
 
         <form action="/gimme" method="post">
-            <input type="text" name="newColor" value="${data.gmNewColor}" />
-            <input type="number" name="colorStrength" value="${data.colorStrength}" min="0" max="100" />
-            <input type="hidden" name="imageId" value="${data.gmImageId}" />
+            <input type="text" name="newColor" value="${data.newColor}" />
+            <input type="number" name="newColorStrength" value="${data.newColorStrength}" min="0" max="100" />
+            <input type="hidden" name="imageId" value="${data.imageID}" />
             <input type="submit" value="Enregistrer" />
         </form>
 
