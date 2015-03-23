@@ -140,7 +140,7 @@ bower_components
 public/css/app.css
 public/js/app.js
 uploads/
-public/gm
+public/tmp
 gm_test/
 gm_test.js
 
