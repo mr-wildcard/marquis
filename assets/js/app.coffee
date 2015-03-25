@@ -37,19 +37,21 @@ onDragEvent = (e) ->
 
 	if e.type == "drop"
 		dndFile = e.target.files || e.dataTransfer.files;
-		console.log isUnique(dndFile), isAcceptedType(dndFile)
 		if isUnique(dndFile) && isAcceptedType(dndFile)
 			formData = new FormData
-			formData.append 'file', dndFile
+			formData.append 'file', dndFile[0]
+
+			console.log(dndFile);
 
 			uploading = true
 
 			xhr = new XMLHttpRequest
-			xhr.open 'POST', '/'
-			xhr.onload = ->
-				console.log 'upload terminé'
+			xhr.open 'POST', '/', true
+			xhr.onload = () ->
+				console.log
 				uploading = false
 				qsDndUploadholder.className = ''
+				window.location.href = JSON.parse(@response).redirect
 				return
 
 			xhr.upload.onprogress = (e) ->
@@ -66,7 +68,6 @@ isUnique = (file) ->
 
 
 isAcceptedType = (file) ->
-	console.log file
 	return dndAcceptedTypes[file[0].type] == true
 
 displayErrorMessage = (message) ->

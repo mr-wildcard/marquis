@@ -7,6 +7,7 @@ let koa       = require('koa'),
     views     = require('koa-views'),
     compress  = require('koa-compress'),
     parse     = require('co-busboy'),
+    saveTo = require('save-to'),
     bodyParse = require('co-body'),
     fs        = require('fs'),
     os        = require('os'),
@@ -49,33 +50,32 @@ app.get('/', function *() {
 
 app.post('/', function *(next) {
 
-  var uploadParts = parse(this);
+  var uploadParts = parse(this, {
+    autoFields: true // saves the fields to parts.field(s)
+  });
 
   var uploadPart;
-  var stream;
 
   var randomImageId = Math.round(1 + Math.random() * 10000);
   var randomImagePath = randomImageId + '.png';
 
   while (uploadPart = yield uploadParts) {
-    stream = fs.createWriteStream(
-        path.join(
-            imageConfig.publicFolder,
-            imageConfig.tmpFolder,
-            randomImagePath
-        )
-    );
 
-    uploadPart.pipe(stream);
-
-    console.log('uploading %s -> %s', uploadPart.filename, stream.path);
+    yield saveTo(uploadPart, path.join(
+        imageConfig.publicFolder,
+        imageConfig.tmpFolder,
+        randomImagePath
+    ));
 
   };
 
   this.session.originalImage = imageConfig.tmpFolder + randomImagePath;
   this.session.imageID = randomImageId;
 
-  this.redirect('/gimme');
+  //this.redirect('/gimme');
+  this.body = {
+    redirect: 'gimme'
+  };
 
 });
 

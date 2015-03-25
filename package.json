@@ -38,6 +38,7 @@
   "dependencies": {
     "caman": "^4.1.2",
     "gm": "^1.17.0",
-    "koa-mongo": "^0.3.0"
+    "koa-mongo": "^0.3.0",
+    "save-to": "^1.0.3"
   }
 }
