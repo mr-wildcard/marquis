@@ -6,6 +6,10 @@ var inject = require('gulp-inject');
 var coffee = require('gulp-coffee');
 var gutil = require('gutil');
 var rename = require('gulp-rename');
+var glob = require('glob');
+var StreamQueue = require('streamqueue');
+
+
 
 gulp.task("dev-css", function () {
 
@@ -28,17 +32,20 @@ gulp.task("dev-css", function () {
 
 gulp.task("dev-js", function () {
 
-    var combined = combiner.obj([
-        gulp.src( "assets/js/**/*.coffee" ),
-        coffee({bare: true}),
-        rename('app.js'),
-        gulp.dest("public/js")
-    ]);
+    var componentsFolders = glob.sync('assets/js/*/');
+    var queue = StreamQueue({ objectMode: true });
 
-    combined.on('error', console.error.bind(console));
+    componentsFolders.forEach(function(folder) {
+        var componentName = folder.match(/.+\/(.+)\/$/)[1];
+        queue.queue(
+            gulp.src(folder + '*.coffee')
+                .pipe(coffee({bare: true}))
+                .pipe(rename(componentName + ".js"))
+                .pipe(gulp.dest("public/js"))
+        );
+    });
 
-    return combined;
-
+    return queue.done();
 });
 
 gulp.task("watch", function () {
