@@ -84,8 +84,8 @@ app.get('/gimme', function *() {
   this.body = marko.load('./views/pages/gimme/gimme.marko').renderSync({
     originalImage: this.session.originalImage,
     imageID: this.session.imageID,
-    newColor: "#ff0000",
-    newColorStrength: 50
+    newColor: imageConfig.colorizeColor,
+    newColorStrength: imageConfig.colorizeStrength
   });
 
   this.type = "text/html";
