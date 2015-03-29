@@ -137,8 +137,8 @@ bower_components
 .bower-tmp
 
 *.marko.js
-public/css/app.css
-public/js/app.js
+public/css
+public/js
 uploads/
 public/tmp
 gm_test/
