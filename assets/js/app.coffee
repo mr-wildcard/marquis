@@ -32,6 +32,7 @@ window.onload = ->
 		qsDndUploadholder.addEventListener 'drop', onDragEvent, false
 
 onDragEvent = (e) ->
+
 	e.stopPropagation()
 	e.preventDefault()
 
@@ -41,24 +42,20 @@ onDragEvent = (e) ->
 			formData = new FormData
 			formData.append 'file', dndFile[0]
 
-			console.log(dndFile);
-
 			uploading = true
 
 			xhr = new XMLHttpRequest
 			xhr.open 'POST', '/', true
 			xhr.onload = () ->
-				console.log
 				uploading = false
 				qsDndUploadholder.className = ''
+
 				window.location.href = JSON.parse(@response).redirect
 				return
 
 			xhr.upload.onprogress = (e) ->
 				if e.lengthComputable
 					complete = e.loaded / e.total * 100 | 0
-
-					console.log 'upload progression:', complete
 				return
 
 			xhr.send formData
