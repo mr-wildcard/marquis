@@ -72,7 +72,6 @@ app.post('/', function *(next) {
   this.session.originalImage = imageConfig.tmpFolder + randomImagePath;
   this.session.imageID = randomImageId;
 
-  //this.redirect('/gimme');
   this.body = {
     redirect: 'gimme'
   };
@@ -82,7 +81,7 @@ app.post('/', function *(next) {
 app.get('/gimme', function *() {
 
   if (!this.session.originalImage) {
-      this.redirect('/');
+      //this.redirect('/');
   };
 
   this.body = marko.load('./views/pages/gimme/gimme.marko').renderSync({
