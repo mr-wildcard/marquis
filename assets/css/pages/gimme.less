@@ -1,0 +1,24 @@
+.config-wrapper {
+
+  height: 100vh;
+
+  &:after {
+    content: " ";
+    display: table;
+  }
+
+  .settings-container, .map-container {
+    float: left;
+
+    width: 50%;
+    height: 100%;
+  }
+
+  .map-container {
+    .map {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
