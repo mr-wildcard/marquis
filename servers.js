@@ -81,6 +81,10 @@ app.post('/', function *(next) {
 
 app.get('/gimme', function *() {
 
+  if (!this.session.originalImage) {
+      this.redirect('/');
+  };
+
   this.body = marko.load('./views/pages/gimme/gimme.marko').renderSync({
     originalImage: this.session.originalImage,
     imageID: this.session.imageID,
