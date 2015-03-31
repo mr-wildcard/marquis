@@ -13,3 +13,8 @@ do ->
 		zoom: 9
 
 	map = new (google.maps.Map)(document.getElementById('map'), mapOptions)
+
+	Caman.remoteProxy = "proxy";
+	Caman.DEBUG = true
+	Caman "#uploaded-marker", () ->
+		@brightness(5).render()

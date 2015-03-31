@@ -4,9 +4,7 @@
         <div class="config-wrapper">
 
             <div class="settings-container">
-                <img
-                data-caman="vibrance(0) colorize('#ff0000', 100)"
-                src="${data.originalImage}" alt="Marquis Image" />
+                <img id="uploaded-marker" src="${data.originalImage}" alt="Marquis Image" />
 
                 <form action="/gimme" method="post">
                     <input type="text" name="newColor" value="${data.newColor}" />
@@ -23,7 +21,7 @@
         </div>
 
         <script src="https://maps.google.com/maps/api/js?sensor=false"></script>
-        <script src="/js/caman.min.js"></script>
+        <script src="/js/caman.full.js"></script>
         <script src="/js/gimme.js"></script>
     </layout-put>
 </layout-use>
