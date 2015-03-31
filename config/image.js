@@ -10,6 +10,7 @@ module.exports = {
   acceptedTypes: {
     'image/png': true,
     'image/jpeg': true,
+    'image/jpg': true,
     'image/gif': true
   }
 
