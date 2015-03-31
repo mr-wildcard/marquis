@@ -124,6 +124,20 @@ app.get('/pickup', function *() {
     this.type = "text/html";
 });
 
+app.get('/proxy', function *(next) {
+
+  this.assert(this.query.camanProxyUrl, 500, "Gimme a param plz.");
+
+  var filenameRequest = path.basename( this.query.camanProxyUrl );
+  var filenameExtension = path.extname( filenameRequest ).replace(".", "");
+
+  if (imageConfig.acceptedTypes['image/' + filenameExtension] !== undefined) {
+
+    this.type = path.extname( filenameRequest );
+    this.body = fs.createReadStream(imageConfig.publicFolder + imageConfig.tmpFolder + filenameRequest);
+  };
+});
+
 function camanExportImage(inputPath, outputPath, hexColor, colorStrength) {
 
     return function(done) {
