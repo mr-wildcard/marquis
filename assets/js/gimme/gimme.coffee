@@ -17,7 +17,7 @@ do ->
 	marker = new (google.maps.Marker)(
 		position: map.getCenter()
 		map: map
-		draggable:true
+		draggable: true
 		animation: google.maps.Animation.DROP
 		icon:
 			url: window.originalImage
