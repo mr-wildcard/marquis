@@ -14,6 +14,15 @@ do ->
 
 	map = new (google.maps.Map)(document.getElementById('map'), mapOptions)
 
+	marker = new (google.maps.Marker)(
+		position: map.getCenter()
+		map: map
+		draggable:true
+		animation: google.maps.Animation.DROP
+		icon:
+			url: window.originalImage
+	)
+
 	Caman.remoteProxy = "proxy";
 	Caman.DEBUG = true
 	Caman "#uploaded-marker", () ->
