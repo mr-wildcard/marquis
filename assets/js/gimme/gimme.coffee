@@ -30,9 +30,6 @@ do ->
 
 	onColorParamsChanged = () ->
 		if @type == "text" then colorValue = @value else intensityValue = parseInt @value || 0
-		console.log @type, colorValue, intensityValue
-
-		camanImage.colorize(colorValue, intensityValue).render();
 
 	["paste", "change"].forEach (eventName) ->
 		colorInput.addEventListener eventName, onColorParamsChanged, false
@@ -43,7 +40,5 @@ do ->
 	camanImage = Caman "#uploaded-marker"
 
 	Caman.Event.listen camanImage, "processStart", ->
-		console.log 'started'
 
 	Caman.Event.listen camanImage, "processStart", ->
-		console.log "ended"
