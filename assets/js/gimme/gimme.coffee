@@ -39,6 +39,9 @@ do ->
 
 	Caman.remoteProxy = "proxy";
 
+	_onImageProcessed = ->
+		marker.setIcon @toBase64()
+
 	camanImage = Caman "#uploaded-marker"
 
 	Caman.Event.listen camanImage, "processStart", ->
