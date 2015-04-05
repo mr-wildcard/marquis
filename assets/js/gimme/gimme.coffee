@@ -40,8 +40,10 @@ do ->
 
 	Caman.remoteProxy = "proxy";
 
-	Caman.Event.listen "processStart", () ->
+	camanImage = Caman "#uploaded-marker"
+
+	Caman.Event.listen camanImage, "processStart", ->
 		console.log 'started'
 
-	Caman.Event.listen "processStart", () ->
+	Caman.Event.listen camanImage, "processStart", ->
 		console.log "ended"
