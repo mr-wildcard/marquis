@@ -25,4 +25,5 @@ do ->
 
 	Caman.remoteProxy = "proxy";
 	Caman "#uploaded-marker", () ->
-		@brightness(5).render()
+		@brightness(5).render()		@colorize("#ff0000", 80)
+		@render();
