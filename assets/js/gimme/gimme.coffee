@@ -39,9 +39,6 @@ do ->
 		intensityInput.addEventListener eventName, onColorParamsChanged, false
 
 	Caman.remoteProxy = "proxy";
-	Caman "#uploaded-marker", () ->
-		@colorize("#ff0000", 80)
-		@render();
 
 	Caman.Event.listen "processStart", () ->
 		console.log 'started'
