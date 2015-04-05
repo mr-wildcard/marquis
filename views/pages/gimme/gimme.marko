@@ -7,8 +7,8 @@
                 <img id="uploaded-marker" src="${data.originalImage}" alt="Marquis Image" />
 
                 <form action="/gimme" method="post">
-                    <input type="text" name="newColor" value="${data.newColor}" />
-                    <input type="number" name="newColorStrength" value="${data.newColorStrength}" min="0" max="100" />
+                    <input type="text" name="newColor" value="${data.newColor}" id="colorTextInput" />
+                    <input type="number" name="newColorStrength" value="${data.newColorStrength}" min="0" max="100" id="intensityInput" />
                     <input type="hidden" name="imageId" value="${data.imageID}" />
                     <input type="submit" value="Enregistrer" />
                 </form>
