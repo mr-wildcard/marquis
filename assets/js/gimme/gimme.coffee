@@ -30,6 +30,8 @@ do ->
 
 	onColorParamsChanged = () ->
 		if @type == "text" then colorValue = @value else intensityValue = parseInt @value || 0
+		camanImage.revert false
+		camanImage.colorize(colorValue, intensityValue).render(_onImageProcessed);
 
 	["paste", "change"].forEach (eventName) ->
 		colorInput.addEventListener eventName, onColorParamsChanged, false
