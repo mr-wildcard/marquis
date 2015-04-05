@@ -24,6 +24,5 @@ do ->
 	)
 
 	Caman.remoteProxy = "proxy";
-	Caman.DEBUG = true
 	Caman "#uploaded-marker", () ->
 		@brightness(5).render()
