@@ -37,13 +37,11 @@ do ->
 		colorInput.addEventListener eventName, onColorParamsChanged, false
 		intensityInput.addEventListener eventName, onColorParamsChanged, false
 
-	Caman.remoteProxy = "proxy";
-
 	_onImageProcessed = ->
 		marker.setIcon @toBase64()
 
+	Caman.remoteProxy = "proxy";
 	camanImage = Caman "#uploaded-marker"
-
 	Caman.Event.listen camanImage, "processStart", ->
 
 	Caman.Event.listen camanImage, "processStart", ->
