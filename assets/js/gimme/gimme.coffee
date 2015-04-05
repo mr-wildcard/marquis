@@ -23,6 +23,10 @@ do ->
 			url: window.originalImage
 	)
 
+	google.maps.event.addDomListener window, 'resize', ->
+		google.maps.event.trigger map, "resize"
+		map.setCenter marker.getPosition()
+
 	colorInput = document.getElementById "colorTextInput"
 	intensityInput = document.getElementById "intensityInput"
 	colorValue = colorInput.value
