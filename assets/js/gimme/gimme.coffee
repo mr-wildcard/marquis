@@ -23,6 +23,21 @@ do ->
 			url: window.originalImage
 	)
 
+	colorInput = document.getElementById "colorTextInput"
+	intensityInput = document.getElementById "intensityInput"
+	colorValue = colorInput.value
+	intensityValue = parseInt intensityInput.value
+
+	onColorParamsChanged = () ->
+		if @type == "text" then colorValue = @value else intensityValue = parseInt @value || 0
+		console.log @type, colorValue, intensityValue
+
+		camanImage.colorize(colorValue, intensityValue).render();
+
+	["paste", "change"].forEach (eventName) ->
+		colorInput.addEventListener eventName, onColorParamsChanged, false
+		intensityInput.addEventListener eventName, onColorParamsChanged, false
+
 	Caman.remoteProxy = "proxy";
 	Caman "#uploaded-marker", () ->
 		@colorize("#ff0000", 80)
