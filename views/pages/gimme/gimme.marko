@@ -21,7 +21,10 @@
         </div>
 
         <script src="https://maps.google.com/maps/api/js?sensor=false"></script>
-        <script src="/js/caman.full.js"></script>
+        <script>
+            window.originalImage = "${data.originalImage}";
+        </script>
+        <script src="/js/caman.min.js"></script>
         <script src="/js/gimme.js"></script>
     </layout-put>
 </layout-use>
