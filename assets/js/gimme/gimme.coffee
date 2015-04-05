@@ -25,5 +25,11 @@ do ->
 
 	Caman.remoteProxy = "proxy";
 	Caman "#uploaded-marker", () ->
-		@brightness(5).render()		@colorize("#ff0000", 80)
+		@colorize("#ff0000", 80)
 		@render();
+
+	Caman.Event.listen "processStart", () ->
+		console.log 'started'
+
+	Caman.Event.listen "processStart", () ->
+		console.log "ended"
