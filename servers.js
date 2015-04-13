@@ -38,7 +38,8 @@ app.use(compress({
     flush: require('zlib').Z_SYNC_FLUSH
 }));
 
-app.use(serve( __dirname + '/public'));
+app.use(serve(__dirname + '/public'));
+app.use(serve('bower_components'));
 app.use(router(app));
 
 app.keys = appConfig.local.keys;
