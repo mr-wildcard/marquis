@@ -15,11 +15,117 @@
   }
 
   .settings-container {
-
+    
     .settings {
       text-align: center;
-    }
 
+      .input--ishoh {
+      	overflow: hidden;
+      }
+
+      .input__field--ishoh {
+      	margin-top: 1em;
+      	padding: 0.85em 0.15em;
+      	width: 100%;
+      	background: transparent;
+      	color: #595F6E;
+      }
+
+      .input__label--ishoh {
+      	position: absolute;
+      	bottom: 0;
+      	left: 0;
+      	padding: 0 0.25em;
+      	width: 100%;
+      	height: calc(100% - 1em);
+      	text-align: left;
+      	pointer-events: none;
+      }
+
+      .input__label-content--ishoh {
+      	position: absolute;
+      }
+
+      .input__label--ishoh::before,
+      .input__label--ishoh::after {
+      	content: '';
+      	position: absolute;
+      	top: 0;
+      	left: 0;
+      	width: 100%;
+      	height: calc(100% - 10px);
+      	border-bottom: 1px solid #B9C1CA;
+      }
+
+      .input__label--ishoh::after {
+      	margin-top: 2px;
+      	border-bottom: 4px solid red;
+      	-webkit-transform: translate3d(-100%, 0, 0);
+      	transform: translate3d(-100%, 0, 0);
+      	-webkit-transition: -webkit-transform 0.3s;
+      	transition: transform 0.3s;
+      }
+
+      .input__label--ishoh-color-1::after {
+      	border-color: hsl(200, 100%, 50%);
+      }
+
+      .input__label--ishoh-color-2::after {
+      	border-color: hsl(160, 100%, 50%);
+      }
+
+      .input__label--ishoh-color-3::after {
+      	border-color: hsl(20, 100%, 50%);
+      }
+
+      .input__field--ishoh:focus + .input__label--ishoh::after,
+      .input--filled .input__label--ishoh::after {
+      	-webkit-transform: translate3d(0, 0, 0);
+      	transform: translate3d(0, 0, 0);
+      }
+
+      .input__field--ishoh:focus + .input__label--ishoh .input__label-content--ishoh,
+      .input--filled .input__label-content--ishoh {
+      	-webkit-animation: anim-1 0.3s forwards;
+      	animation: anim-1 0.3s forwards;
+      }
+
+      @-webkit-keyframes anim-1 {
+      	50% {
+      		opacity: 0;
+      		-webkit-transform: translate3d(1em, 0, 0);
+      		transform: translate3d(1em, 0, 0);
+      	}
+      	51% {
+      		opacity: 0;
+      		-webkit-transform: translate3d(-1em, -40%, 0);
+      		transform: translate3d(-1em, -40%, 0);
+      	}
+      	100% {
+      		opacity: 1;
+      		-webkit-transform: translate3d(0, -40%, 0);
+      		transform: translate3d(0, -40%, 0);
+      	}
+      }
+
+      @keyframes anim-1 {
+      	50% {
+      		opacity: 0;
+      		-webkit-transform: translate3d(1em, 0, 0);
+      		transform: translate3d(1em, 0, 0);
+      	}
+      	51% {
+      		opacity: 0;
+      		-webkit-transform: translate3d(-1em, -40%, 0);
+      		transform: translate3d(-1em, -40%, 0);
+      	}
+      	100% {
+      		opacity: 1;
+      		-webkit-transform: translate3d(0, -40%, 0);
+      		transform: translate3d(0, -40%, 0);
+      	}
+      }
+    }
   }
 
   .map-container {
