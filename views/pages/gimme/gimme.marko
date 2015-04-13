@@ -4,14 +4,16 @@
         <div class="config-wrapper">
 
             <div class="settings-container">
-                <img id="uploaded-marker" src="${data.originalImage}" alt="Marquis Image" />
+              <div class="settings">
+                  <img id="uploaded-marker" src="${data.originalImage}" alt="Marquis Image" />
 
-                <form action="/gimme" method="post">
-                    <input type="text" name="newColor" value="${data.newColor}" id="colorTextInput" />
-                    <input type="number" name="newColorStrength" value="${data.newColorStrength}" min="0" max="100" id="intensityInput" />
-                    <input type="hidden" name="imageId" value="${data.imageID}" />
-                    <input type="submit" value="Enregistrer" />
-                </form>
+                  <form action="/gimme" method="post">
+                      <input type="text" name="newColor" value="${data.newColor}" id="colorTextInput" />
+                      <input type="number" name="newColorStrength" value="${data.newColorStrength}" min="0" max="100" id="intensityInput" />
+                      <input type="hidden" name="imageId" value="${data.imageID}" />
+                      <input type="submit" value="Enregistrer" />
+                  </form>
+              </div>
             </div>
 
             <div class="map-container">
